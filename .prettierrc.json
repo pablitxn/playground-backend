@@ -1,8 +1,27 @@
 {
   "semi": true,
-  "trailingComma": "all",
-  "singleQuote": true,
-  "printWidth": 120,
+  "trailingComma": "none",
+  "singleQuote": false,
+  "printWidth": 90,
+  "useTabs": true,
+  "arrowParens": "always",
+  "bracketSpacing": true,
+  "jsxBracketSameLine": false,
   "tabWidth": 2,
-  "arrowParens": "avoid"
+  "overrides": [
+    {
+      "files": ["package.json", "*.yml", ".prettierrc"],
+      "options": {
+        "useTabs": false,
+        "tabWidth": 2
+      }
+    },
+    {
+      "files": ["*.js", "*.jsx", "*.ts", "*.tsx"],
+      "options": {
+        "useTabs": true,
+        "tabWidth": 2
+      }
+    }
+  ]
 }
