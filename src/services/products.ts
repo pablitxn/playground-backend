@@ -39,46 +39,50 @@ export default class ProductsService {
 
 	public async createProduct(payload) {
 		const params = { ...payload }
-		// handling params..
+		console.log("params",params)
 		try {
 			// const { data: { jwt }} = await this.generateToken()
+			const productCreated = await ProductsModel.create({
+				name: payload.name,
+				description: payload.description,
+				imageUrl: payload.imageUrl,
+				price: payload.price
+			})
 
-			const data = {}
-
-			return data
+			return productCreated
 		} catch (err) {
 			this.logger.error(err)
 			throw err
 		}
 	}
 
-	public async editProduct(payload) {
-		const params = { ...payload }
-		// handling params..
-		try {
-			// const { data: { jwt }} = await this.generateToken()
+	// public async editProduct(payload) {
+	// 	const params = { ...payload }
+	// 	// handling params..
+	// 	try {
+	// 		// const { data: { jwt }} = await this.generateToken()
 
-			const data = {}
+	// 		const data = {}
 
-			return data
-		} catch (err) {
-			this.logger.error(err)
-			throw err
-		}
-	}
+	// 		return data
+	// 	} catch (err) {
+	// 		this.logger.error(err)
+	// 		throw err
+	// 	}
+	// }
 
-	public async deleteProduct(payload) {
-		const params = { ...payload }
-		// handling params..
-		try {
-			// const { data: { jwt }} = await this.generateToken()
+	// public async deleteProduct(payload) {
+	// 	const params = { ...payload }
+	// 	// handling params..
+	// 	try {
+	// 		// const { data: { jwt }} = await this.generateToken()
 
-			const data = {}
+	// 		const data = {}
 
-			return data
-		} catch (err) {
-			this.logger.error(err)
-			throw err
-		}
-	}
+	// 		return data
+	// 	} catch (err) {
+	// 		this.logger.error(err)
+	// 		throw err
+	// 	}
+	// }
 }

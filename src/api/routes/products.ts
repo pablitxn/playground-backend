@@ -43,7 +43,7 @@ export default (app: Router) => {
     const { body: product } = req
     try {
       const productServiceInstance = Container.get(ProductsService);
-      const createProduct = await productServiceInstance.createProduct({ product })
+      const createProduct = await productServiceInstance.createProduct(product)
 
       res.status(201).json({
         data: createProduct,
