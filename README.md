@@ -29,4 +29,4 @@ Then just start the server with
 npm run start
 ```
 
-##### visit the project in playground.pablitxn.io
+##### visit the project in playground.pablitxn.io/hello-mern
