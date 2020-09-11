@@ -1,6 +1,7 @@
 import { Service, Inject } from 'typedi'
-import axios from 'axios'
 import { EventDispatcher, EventDispatcherInterface } from "../decorators/eventDispatcher"
+// model
+import HelloMernModel from "../models/hello-mern"
 
 @Service()
 export default class HelloMernService {
@@ -11,11 +12,9 @@ export default class HelloMernService {
 
   public async getProducts() {
     try {
-      // const { data } = await this.generateToken();
-      return axios({
-        url: '',
-        method: 'GET'
-      })
+      const data = HelloMernModel.find({})
+      console.log("get?", data)
+      return data
     } catch (err) {
       this.logger.error(err)
       throw err
@@ -28,14 +27,7 @@ export default class HelloMernService {
     try {
       // const { data: { jwt }} = await this.generateToken()
 
-      const { data } = await axios({
-        url: '',
-        method: 'POST',
-        data: {
-          ...params,
-          // jwt
-        }
-      })
+      const data = {}
 
       return data;
     } catch (err) {
