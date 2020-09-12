@@ -12,24 +12,11 @@ export default class ProductsService {
 		@EventDispatcher() private eventDispatcher: EventDispatcherInterface
 	) {}
 
-	public async getProduct(payload) {
-		const params = { ...payload }
-		// handling params..
-		try {
-			// const { data: { jwt }} = await this.generateToken()
-
-			const data = {}
-
-			return data
-		} catch (err) {
-			this.logger.error(err)
-			throw err
-		}
-	}
-
 	public async getProducts() {
 		try {
-			const products = ProductsModel.find({})
+			// const { data: { jwt }} = await this.generateToken()
+			const products = await ProductsModel.find({})
+
 			return products
 		} catch (err) {
 			this.logger.error(err)
@@ -37,17 +24,24 @@ export default class ProductsService {
 		}
 	}
 
-	public async createProduct(payload) {
-		const params = { ...payload }
-		console.log("params",params)
+	public async getProductById(payload) {
+		const { params: { id: productId } } = payload
 		try {
 			// const { data: { jwt }} = await this.generateToken()
-			const productCreated = await ProductsModel.create({
-				name: payload.name,
-				description: payload.description,
-				imageUrl: payload.imageUrl,
-				price: payload.price
-			})
+			const product = ProductsModel.findById(productId)
+
+			return productId
+		} catch (err) {
+			this.logger.error(err)
+			throw err
+		}
+	}
+
+	public async createProduct(payload) {
+		const { body: product } = payload
+		try {
+			// const { data: { jwt }} = await this.generateToken()
+			const productCreated = await ProductsModel.create(product)
 
 			return productCreated
 		} catch (err) {
@@ -56,33 +50,31 @@ export default class ProductsService {
 		}
 	}
 
-	// public async editProduct(payload) {
-	// 	const params = { ...payload }
-	// 	// handling params..
-	// 	try {
-	// 		// const { data: { jwt }} = await this.generateToken()
+	public async editProduct(payload) {
+		const { body: product } = payload
+		const {	params: { id: productId }	} = payload
 
-	// 		const data = {}
+		try {
+			// const { data: { jwt }} = await this.generateToken()
+			const productEdited = await ProductsModel.findByIdAndUpdate(productId, product)
 
-	// 		return data
-	// 	} catch (err) {
-	// 		this.logger.error(err)
-	// 		throw err
-	// 	}
-	// }
+			return productEdited
+		} catch (err) {
+			this.logger.error(err)
+			throw err
+		}
+	}
 
-	// public async deleteProduct(payload) {
-	// 	const params = { ...payload }
-	// 	// handling params..
-	// 	try {
-	// 		// const { data: { jwt }} = await this.generateToken()
+	public async deleteProduct(payload) {
+		const { params: { id: productId } } = payload
+		try {
+			// const { data: { jwt }} = await this.generateToken()
+			const productEdited = await ProductsModel.findByIdAndRemove(productId)
 
-	// 		const data = {}
-
-	// 		return data
-	// 	} catch (err) {
-	// 		this.logger.error(err)
-	// 		throw err
-	// 	}
-	// }
+			return productEdited
+		} catch (err) {
+			this.logger.error(err)
+			throw err
+		}
+	}
 }
