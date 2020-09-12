@@ -1,9 +1,12 @@
 // Dependency Injection
 import { Service, Inject } from 'typedi'
 // Decorators
-import { EventDispatcher, EventDispatcherInterface } from '../decorators/eventDispatcher'
+import {
+	EventDispatcher,
+	EventDispatcherInterface
+} from '../../decorators/eventDispatcher'
 // Models
-import ProductsModel from '../models/products'
+import ProductsModel from '../../models/ecommerce/products'
 
 @Service()
 export default class ProductsService {
@@ -25,7 +28,9 @@ export default class ProductsService {
 	}
 
 	public async getProductById(payload) {
-		const { params: { id: productId } } = payload
+		const {
+			params: { id: productId }
+		} = payload
 		try {
 			// const { data: { jwt }} = await this.generateToken()
 			const product = ProductsModel.findById(productId)
@@ -52,7 +57,9 @@ export default class ProductsService {
 
 	public async editProduct(payload) {
 		const { body: product } = payload
-		const {	params: { id: productId }	} = payload
+		const {
+			params: { id: productId }
+		} = payload
 
 		try {
 			// const { data: { jwt }} = await this.generateToken()
@@ -66,7 +73,9 @@ export default class ProductsService {
 	}
 
 	public async deleteProduct(payload) {
-		const { params: { id: productId } } = payload
+		const {
+			params: { id: productId }
+		} = payload
 		try {
 			// const { data: { jwt }} = await this.generateToken()
 			const productEdited = await ProductsModel.findByIdAndRemove(productId)

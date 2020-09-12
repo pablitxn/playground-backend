@@ -1,4 +1,4 @@
-import { IProducts } from '../interfaces/IProducts'
+import { IProducts } from '../interfaces/ecommerce/IProducts'
 import mongoose from 'mongoose'
 
 const Products = new mongoose.Schema(
