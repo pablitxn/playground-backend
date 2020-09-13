@@ -1,7 +1,7 @@
 // Express
 import { Router, Request, Response } from 'express'
 // Services
-import ProductsService from '../../services/products'
+import ProductsService from 'services/ecommerce/products'
 // Dependency Injection
 import { Container } from 'typedi'
 
@@ -26,17 +26,17 @@ export default (app: Router) => {
 	})
 
 	route.get('/get-product/:id', async (req: Request, res: Response) => {
-	  try {
-	    const productServiceInstance = Container.get(ProductsService);
-	    const products = await productServiceInstance.getProductById(req)
+		try {
+			const productServiceInstance = Container.get(ProductsService)
+			const products = await productServiceInstance.getProductById(req)
 
-	    res.status(200).json({
-	      data: products,
-	      message: "product found"
-	    })
-	  } catch (err) {
-	    res.status(500).send(err)
-	  }
+			res.status(200).json({
+				data: products,
+				message: 'product found'
+			})
+		} catch (err) {
+			res.status(500).send(err)
+		}
 	})
 
 	route.post('/add-product', async (req: Request, res: Response) => {
@@ -69,16 +69,16 @@ export default (app: Router) => {
 	})
 
 	route.delete('/delete-product/:id', async (req: Request, res: Response) => {
-	  try {
-	    const productServiceInstance = Container.get(ProductsService);
-	    const productDeleted = await productServiceInstance.deleteProduct(req)
+		try {
+			const productServiceInstance = Container.get(ProductsService)
+			const productDeleted = await productServiceInstance.deleteProduct(req)
 
-	    res.status(200).json({
-	      data: productDeleted,
-	      message: "product deleted"
-	    })
-	  } catch (err) {
-	    res.status(500).send(err)
-	  }
+			res.status(200).json({
+				data: productDeleted,
+				message: 'product deleted'
+			})
+		} catch (err) {
+			res.status(500).send(err)
+		}
 	})
 }
