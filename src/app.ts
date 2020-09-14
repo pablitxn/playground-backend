@@ -1,4 +1,4 @@
-// @ts-ignore
+// @ts-nocheck
 // We need this in order to use @Decorators
 import 'reflect-metadata'
 // Project configs

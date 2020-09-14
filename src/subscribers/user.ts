@@ -27,7 +27,7 @@ export default class UserSubscriber {
 
 			UserModel.update({ _id }, { $set: { lastLogin: new Date() } })
 		} catch (e) {
-			Logger.error(`🔥 Error on event ${events.user.signIn}: %o`, e)
+			// Logger.error(`🔥 Error on event ${events.user.signIn}: %o`, e)
 
 			// Throw the error so the process die (check src/app.ts)
 			throw e
@@ -47,7 +47,7 @@ export default class UserSubscriber {
 			// Start your email sequence or whatever
 			// MailService.startSequence('user.welcome', { email, name })
 		} catch (e) {
-			Logger.error(`🔥 Error on event ${events.user.signUp}: %o`, e)
+			// Logger.error(`🔥 Error on event ${events.user.signUp}: %o`, e)
 
 			// Throw the error so the process dies (check src/app.ts)
 			throw e

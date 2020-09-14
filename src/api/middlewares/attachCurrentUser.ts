@@ -24,7 +24,7 @@ const attachCurrentUser = async (req, res, next) => {
 		req.currentUser = currentUser
 		return next()
 	} catch (e) {
-		Logger.error('🔥 Error attaching user to req: %o', e)
+		// Logger.error('🔥 Error attaching user to req: %o', e)
 		return next(e)
 	}
 }
