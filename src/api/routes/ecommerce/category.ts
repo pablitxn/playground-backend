@@ -55,6 +55,7 @@ export default (app: Router) => {
 	})
 
 	route.patch('/edit-category/:id', async (req: Request, res: Response) => {
+		console.log(req.body)
 		try {
 			const service = Container.get(CategoryService)
 			const categoryEdited = await service.editCategory(req)

@@ -3,14 +3,13 @@ import mongoose, { Document } from 'mongoose'
 
 const Category = new mongoose.Schema(
 	{
-		id: Number,
 		name: String,
 		slug: String,
 		description: String,
 		parent: Number,
 		count: Number,
+		products: Array,
 		image: {
-			id: Number,
 			src: String
 		}
 	},

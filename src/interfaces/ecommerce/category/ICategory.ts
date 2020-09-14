@@ -1,12 +1,13 @@
+import { IProduct } from 'interfaces/ecommerce'
+
 export interface ICategory {
-	id: number;
-	name: string;
-	slug: string;
-	description: string;
-	parent: number;
-	count: number;
+	name: string
+	slug: string
+	description: string
+	parent: number
+	count: number
 	image: {
-		id: number;
-		src: string;
-	};
+		src: string
+	}
+	products: IProduct[]
 }
