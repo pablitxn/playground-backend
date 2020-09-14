@@ -8,14 +8,14 @@ export default async ({ expressApp }) => {
 	const mongoConnection = await mongooseLoader()
 	Logger.info('DB connected successfully!')
 
-	const ProductsModel = {
-		name: 'ProductsModel',
-		model: require('../models/products').default
-	}
+	const userModel = {
+    name: "userModel",
+    model: require("../models/auth/user").default,
+  };
 
 	await dependencyInjectorLoader({
 		mongoConnection,
-		models: [ProductsModel]
+		models: [userModel]
 	})
 	Logger.info('mongoose models successfully injected into DI container')
 

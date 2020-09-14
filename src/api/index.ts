@@ -1,9 +1,11 @@
+// Router
 import { Router } from 'express'
-import auth from './routes/auth'
-import user from './routes/user'
+// Routes
+import auth from './routes/auth/auth'
+import user from './routes/auth/user'
+import product from './routes/ecommerce/product'
 import ecommerce from './routes/ecommerce'
 
-// guaranteed to get dependencies
 export default () => {
 	const app = Router()
 	auth(app)

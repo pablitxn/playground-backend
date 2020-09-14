@@ -1,21 +1,17 @@
 // Dependency Injection
 import { Service, Inject } from 'typedi'
-// Decorators
-import { EventDispatcher, EventDispatcherInterface } from 'decorators/eventDispatcher'
 // Models
-import categoriesModel from 'models/ecommerce/categories'
+import categoryModel from '../../models/ecommerce/category'
 
 @Service()
-export default class Categories {
+export default class Category {
 	constructor(
 		@Inject('logger') private logger,
-		@EventDispatcher() private eventDispatcher: EventDispatcherInterface
 	) {}
 
 	public async getCategories() {
 		try {
-			// const { data: { jwt }} = await this.generateToken()
-			const categories = await categoriesModel.find({})
+			const categories = await categoryModel.find({})
 
 			return categories
 		} catch (err) {
@@ -29,8 +25,7 @@ export default class Categories {
 			params: { id: category }
 		} = payload
 		try {
-			// const { data: { jwt }} = await this.generateToken()
-			const products = categoriesModel.findById(category)
+			const products = await categoryModel.findById(category)
 
 			return products
 		} catch (err) {
@@ -42,8 +37,7 @@ export default class Categories {
 	public async createCategory(payload) {
 		const { body: newCategory } = payload
 		try {
-			// const { data: { jwt }} = await this.generateToken()
-			const categoryCreated = await categoriesModel.create(newCategory)
+			const categoryCreated = await categoryModel.create(newCategory)
 
 			return categoryCreated
 		} catch (err) {
@@ -59,8 +53,7 @@ export default class Categories {
 		} = payload
 
 		try {
-			// const { data: { jwt }} = await this.generateToken()
-			const categoryEdited = await categoriesModel.findByIdAndUpdate(category, newData)
+			const categoryEdited = await categoryModel.findByIdAndUpdate(category, newData)
 
 			return categoryEdited
 		} catch (err) {
@@ -74,8 +67,7 @@ export default class Categories {
 			params: { id: category }
 		} = payload
 		try {
-			// const { data: { jwt }} = await this.generateToken()
-			const categoryDeleted = await categoriesModel.findByIdAndRemove(category)
+			const categoryDeleted = await categoryModel.findByIdAndRemove(category)
 
 			return categoryDeleted
 		} catch (err) {

@@ -1,4 +1,4 @@
-import { IOffer } from 'interfaces/ecommerce/IOffer'
+import { IOffer } from 'interfaces/ecommerce'
 import mongoose, { Document } from 'mongoose'
 
 const Offer = new mongoose.Schema({

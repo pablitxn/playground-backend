@@ -1,14 +1,12 @@
-import { Router } from 'express'
-import products from './products'
-import categories from './categories'
-import offers from './offers'
+// Routes
+import product from './product'
+import category from './category'
+import offer from './offer'
 
-// guaranteed to get dependencies
-export default () => {
-	const app = Router()
-	products(app)
-	categories(app)
-	offers(app)
+export default (app) => {
+	product(app)
+	category(app)
+	offer(app)
 
-	return app
+	return
 }

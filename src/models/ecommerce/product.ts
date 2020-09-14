@@ -1,12 +1,16 @@
-import { IProduct } from 'interfaces/ecommerce/IProduct'
+import { IProduct } from 'interfaces/ecommerce'
 import mongoose, { Document } from 'mongoose'
 
 const Product = new mongoose.Schema(
 	{
-		imageUrl: String,
 		name: String,
+		slug: String,
 		description: String,
-		price: String
+		price: String,
+		regular_price: String,
+		sale_price: String,
+		on_sale: Boolean,
+		related_ids: Array,
 	},
 	{ timestamps: true }
 )

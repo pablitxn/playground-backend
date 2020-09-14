@@ -1,7 +1,7 @@
 // Express
 import { Router, Request, Response } from 'express'
 // Services
-import CategoriesService from 'services/ecommerce/category'
+import CategoryService from '../../../services/ecommerce/category'
 // Dependency Injection
 import { Container } from 'typedi'
 
@@ -13,7 +13,7 @@ export default (app: Router) => {
 
 	route.get('/categories', async (req: Request, res: Response) => {
 		try {
-			const service = Container.get(CategoriesService)
+			const service = Container.get(CategoryService)
 			const categories = await service.getCategories()
 
 			res.status(200).json({
@@ -27,8 +27,8 @@ export default (app: Router) => {
 
 	route.get('/category/:id', async (req: Request, res: Response) => {
 		try {
-			const service = Container.get(CategoriesService)
-			const products = await service.getProductsOfCategory(req)
+			const service = Container.get(CategoryService)
+			const products = await service.getProductsByCategory(req)
 
 			res.status(200).json({
 				data: products,
@@ -41,7 +41,7 @@ export default (app: Router) => {
 
 	route.post('/add-category', async (req: Request, res: Response) => {
 		try {
-			const service = Container.get(CategoriesService)
+			const service = Container.get(CategoryService)
 			const categoryCreated = await service.createCategory(req)
 
 			res.status(201).json({
@@ -56,7 +56,7 @@ export default (app: Router) => {
 
 	route.patch('/edit-category/:id', async (req: Request, res: Response) => {
 		try {
-			const service = Container.get(CategoriesService)
+			const service = Container.get(CategoryService)
 			const categoryEdited = await service.editCategory(req)
 
 			res.status(201).json({
@@ -70,7 +70,7 @@ export default (app: Router) => {
 
 	route.delete('/delete-category/:id', async (req: Request, res: Response) => {
 		try {
-			const service = Container.get(CategoriesService)
+			const service = Container.get(CategoryService)
 			const categoryDeleted = await service.deleteCategory(req)
 
 			res.status(200).json({

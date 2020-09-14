@@ -1,7 +1,6 @@
-import { IProduct } from './IProduct'
+import { IProduct } from 'interfaces/ecommerce'
 
 export interface IOffer {
-	_id: number
 	name: string
 	description: string
 	products: IProduct[]

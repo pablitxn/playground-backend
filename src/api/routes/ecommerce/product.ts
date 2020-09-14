@@ -1,7 +1,7 @@
 // Express
 import { Router, Request, Response } from 'express'
 // Services
-import ProductsService from 'services/ecommerce/products'
+import ProductService from '../../../services/ecommerce/product'
 // Dependency Injection
 import { Container } from 'typedi'
 
@@ -9,11 +9,11 @@ import { Container } from 'typedi'
 const route = Router()
 
 export default (app: Router) => {
-	app.use('/', route)
+	app.use('/ecommerce', route)
 
-	route.get('/list-products', async (req: Request, res: Response) => {
+	route.get('/products', async (req: Request, res: Response) => {
 		try {
-			const productServiceInstance = Container.get(ProductsService)
+			const productServiceInstance = Container.get(ProductService)
 			const products = await productServiceInstance.getProducts()
 
 			res.status(200).json({
@@ -27,7 +27,7 @@ export default (app: Router) => {
 
 	route.get('/get-product/:id', async (req: Request, res: Response) => {
 		try {
-			const productServiceInstance = Container.get(ProductsService)
+			const productServiceInstance = Container.get(ProductService)
 			const products = await productServiceInstance.getProductById(req)
 
 			res.status(200).json({
@@ -41,7 +41,7 @@ export default (app: Router) => {
 
 	route.post('/add-product', async (req: Request, res: Response) => {
 		try {
-			const productServiceInstance = Container.get(ProductsService)
+			const productServiceInstance = Container.get(ProductService)
 			const createProduct = await productServiceInstance.createProduct(req)
 
 			res.status(201).json({
@@ -56,7 +56,7 @@ export default (app: Router) => {
 
 	route.patch('/edit-product/:id', async (req: Request, res: Response) => {
 		try {
-			const productServiceInstance = Container.get(ProductsService)
+			const productServiceInstance = Container.get(ProductService)
 			const productEdited = await productServiceInstance.editProduct(req)
 
 			res.status(201).json({
@@ -70,7 +70,7 @@ export default (app: Router) => {
 
 	route.delete('/delete-product/:id', async (req: Request, res: Response) => {
 		try {
-			const productServiceInstance = Container.get(ProductsService)
+			const productServiceInstance = Container.get(ProductService)
 			const productDeleted = await productServiceInstance.deleteProduct(req)
 
 			res.status(200).json({

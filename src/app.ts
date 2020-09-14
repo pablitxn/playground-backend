@@ -1,4 +1,5 @@
-// ?        // We need this in order to use @Decorators
+// @ts-ignore
+// We need this in order to use @Decorators
 import 'reflect-metadata'
 // Project configs
 import config from './config'

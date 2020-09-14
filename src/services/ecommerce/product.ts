@@ -1,15 +1,12 @@
 // Dependency Injection
 import { Service, Inject } from 'typedi'
-// Decorators
-import { EventDispatcher, EventDispatcherInterface } from 'decorators/eventDispatcher'
 // Models
-import productModel from 'models/ecommerce/product'
+import productModel from '../../models/ecommerce/product'
 
 @Service()
 export default class Product {
 	constructor(
 		@Inject('logger') private logger,
-		@EventDispatcher() private eventDispatcher: EventDispatcherInterface
 	) {}
 
 	public async getProducts() {
@@ -24,9 +21,11 @@ export default class Product {
 	}
 
 	public async getProductById(payload) {
-		const {	params: { id: productId }	} = payload
+		const {
+			params: { id: productId }
+		} = payload
 		try {
-			const product = productModel.findById(productId)
+			const product = await productModel.findById(productId)
 
 			return product
 		} catch (err) {
@@ -49,7 +48,9 @@ export default class Product {
 
 	public async editProduct(payload) {
 		const { body: newData } = payload
-		const {	params: { id: product }	} = payload
+		const {
+			params: { id: product }
+		} = payload
 		try {
 			const productEdited = await productModel.findByIdAndUpdate(product, newData)
 
@@ -61,7 +62,9 @@ export default class Product {
 	}
 
 	public async deleteProduct(payload) {
-		const {	params: { id: product }	} = payload
+		const {
+			params: { id: product }
+		} = payload
 		try {
 			const productDeleted = await productModel.findByIdAndRemove(product)
 
