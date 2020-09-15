@@ -6,7 +6,8 @@
   "scripts": {
     "build": "tsc",
     "npm:build": "npm run build",
-    "start": "nodemon",
+    "dev": "nodemon",
+    "start": "node src/app.ts",
     "inspect": "nodemon --inspect src/app.ts",
     "test": "jest",
     "lint": "npm run lint:js ",
