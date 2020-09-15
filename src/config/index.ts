@@ -12,7 +12,7 @@ if (envFound.error) {
 
 export default {
 	// Port
-	port: parseInt(process.env.PORT, 10),
+	port: process.env.PORT,
 	// Data Base URL
 	databaseURL: process.env.MONGODB_URI,
 	// JWT Key
