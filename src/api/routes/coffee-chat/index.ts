@@ -1,11 +1,11 @@
-// Router
 import { Router } from 'express'
 // Routes
-import ecommerce from './routes/ecommerce'
+import room from './room'
 
+// Websocket config
 export default () => {
 	const app = Router()
-	ecommerce(app)
+	room(app)
 
 	return app
 }

@@ -7,6 +7,4 @@ export default (app) => {
 	product(app)
 	category(app)
 	offer(app)
-
-	return
 }

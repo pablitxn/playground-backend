@@ -7,17 +7,20 @@ import config from './config'
 import express from 'express'
 // Logs
 import Logger from './loaders/logger'
+// Socket.io
+import http from 'http'
 
 async function startServer() {
+	// Express App
 	const app = express()
+	// Websockets
+	const socket = express()
+	const server = http.createServer(socket)
 
-	/**
-	 * A little hack here
-	 * Import/Export can only be used in 'top-level code'
-	 * Well, at least in node 10 without babel and at the time of writing
-	 * So we are using good old require.
-	 **/
-	await require('./loaders').default({ expressApp: app })
+	await require('./loaders').default({
+		expressApp: app,
+		websocketApp: { socket, server }
+	})
 
 	app.listen(config.port, (err) => {
 		if (err) {
@@ -27,6 +30,18 @@ async function startServer() {
 		Logger.info(`
       ################################################
       🛡️  Server listening on port: ${config.port} 🛡️
+      ################################################
+    `)
+	})
+
+	server.listen(4420, (err) => {
+		if (err) {
+			Logger.error(err)
+			process.exit(1)
+		}
+		Logger.info(`
+      ################################################
+      🛡️  WebSocket listening on port: 4420 🛡️
       ################################################
     `)
 	})
