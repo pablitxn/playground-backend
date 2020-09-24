@@ -5,6 +5,8 @@ import Logger from '../loaders/logger'
 import config from '../config'
 // Routes
 import routes from '../api/routes/coffee-chat'
+// Sockets
+import test from '../sockets/coffee-chat/test'
 
 import {
 	addUser,
@@ -34,8 +36,27 @@ export default ({ socket: app, server }) => {
 	Logger.info('Websocket server in http://localhost:4420/')
 
 	const io = socketIo(server)
+	test(io)
 
-	io.on('connect', (socket) => {
+	/// catch 404 and forward to error handler
+	app.use((req, res, next) => {
+		const err = new Error('Not Found')
+		err['status'] = 404
+		next(err)
+	})
+	app.use((err, req, res, next) => {
+		res.status(err.status || 500)
+		res.json({
+			errors: {
+				message: err.message
+			}
+		})
+	})
+}
+
+/**
+ *
+ * 	io.on('connect', (socket) => {
 		socket.on('join', ({ name, room }, callback) => {
 			const { error, user } = addUser({ id: socket.id, name, room })
 
@@ -83,18 +104,5 @@ export default ({ socket: app, server }) => {
 		})
 	})
 
-	/// catch 404 and forward to error handler
-	app.use((req, res, next) => {
-		const err = new Error('Not Found')
-		err['status'] = 404
-		next(err)
-	})
-	app.use((err, req, res, next) => {
-		res.status(err.status || 500)
-		res.json({
-			errors: {
-				message: err.message
-			}
-		})
-	})
-}
+ *
+ */
