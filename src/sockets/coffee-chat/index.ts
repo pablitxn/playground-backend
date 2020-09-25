@@ -4,7 +4,7 @@ import { Socket } from 'socket.io'
 import { addUser, removeUser, getUser, getUsersInRoom } from './utils'
 
 const coffeeChat = (io: Socket) =>
-	io.on('connect', (socket) => {
+	io.on('connect', (socket: Socket) => {
 		/** Join chat **/
 		socket.on('join', ({ name, room }, callback) => {
 			const { error, user } = addUser({ id: socket.id, name, room })
@@ -30,13 +30,8 @@ const coffeeChat = (io: Socket) =>
 
 		/** Messages room listener  **/
 		socket.on('send-message', (message) => {
-			const user = getUser(socket.id)
-			console.log('user', user)
-			const { name, text, room } = message
-			console.log(`${name} dice ${text} en la sala ${room}`)
+			const { room } = message
 			io.to(room).emit('new-message', message)
-
-			// callback()
 		})
 
 		socket.on('disconnect', () => {
