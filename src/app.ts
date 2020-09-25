@@ -21,11 +21,7 @@ async function startServer() {
 		websocketApp: { app: $app, server }
 	})
 
-	app.listen(config.port, (err: any) => {
-		if (err) {
-			Logger.error(err)
-			process.exit(1)
-		}
+	app.listen(config.port, () => {
 		Logger.info(`
       ################################################
       🛡️  Server listening on port: ${config.port} 🛡️

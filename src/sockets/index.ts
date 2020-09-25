@@ -1,9 +1,9 @@
 // Sockets
 import coffeeChat from './coffee-chat'
 // Socket io
-import { Socket } from 'socket.io'
+import { Server } from 'socket.io'
 
-const Sockets = (io: Socket) => {
+const Sockets = (io: Server) => {
 	coffeeChat(io)
 }
 

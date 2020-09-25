@@ -1,9 +1,9 @@
 // Socket io
-import { Socket } from 'socket.io'
+import { Server, Socket } from 'socket.io'
 // Utils
 import { addUser, removeUser, getUser, getUsersInRoom } from './utils'
 
-const coffeeChat = (io: Socket) =>
+const coffeeChat = (io: Server) =>
 	io.on('connect', (socket: Socket) => {
 		/** Join chat **/
 		socket.on('join', ({ name, room }, callback) => {
