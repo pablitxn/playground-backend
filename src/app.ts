@@ -1,4 +1,3 @@
-// @ts-nocheck
 // We need this in order to use @Decorators
 import 'reflect-metadata'
 // Project configs
@@ -14,15 +13,15 @@ async function startServer() {
 	// Express App
 	const app = express()
 	// Websockets
-	const socket = express()
-	const server = http.createServer(socket)
+	const $app = express()
+	const server = http.createServer($app)
 
 	await require('./loaders').default({
 		expressApp: app,
-		websocketApp: { socket, server }
+		websocketApp: { app: $app, server }
 	})
 
-	app.listen(config.port, (err) => {
+	app.listen(config.port, (err: any) => {
 		if (err) {
 			Logger.error(err)
 			process.exit(1)

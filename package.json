@@ -33,6 +33,7 @@
   "license": "ISC",
   "dependencies": {
     "@types/cors": "^2.8.7",
+    "@types/socket.io": "^2.1.11",
     "argon2": "^0.27.0",
     "axios": "^0.20.0",
     "body-parser": "^1.18.2",

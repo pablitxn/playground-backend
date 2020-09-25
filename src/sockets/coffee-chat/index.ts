@@ -1,21 +1,24 @@
-import { addUser, removeUser, getUser, getUsersInRoom } from './users'
+// Socket io
+import { Socket } from 'socket.io'
+// Utils
+import { addUser, removeUser, getUser, getUsersInRoom } from './utils'
 
-export default (io) =>
+const coffeeChat = (io: Socket) =>
 	io.on('connect', (socket) => {
+		/** Join chat **/
 		socket.on('join', ({ name, room }, callback) => {
 			const { error, user } = addUser({ id: socket.id, name, room })
-
 			if (error) return callback(error)
 
 			socket.join(user.room)
 
-			socket.emit('message', {
+			socket.emit('info-message', {
 				user: 'admin',
 				text: `${user.name}, welcome to room ${user.room}.`
 			})
 			socket.broadcast
 				.to(user.room)
-				.emit('message', { user: 'admin', text: `${user.name} has joined!` })
+				.emit('info-message', { user: 'admin', text: `${user.name} has joined!` })
 
 			io.to(user.room).emit('roomData', {
 				room: user.room,
@@ -25,12 +28,15 @@ export default (io) =>
 			callback()
 		})
 
-		socket.on('sendMessage', (message, callback) => {
+		/** Messages room listener  **/
+		socket.on('send-message', (message) => {
 			const user = getUser(socket.id)
+			console.log('user', user)
+			const { name, text, room } = message
+			console.log(`${name} dice ${text} en la sala ${room}`)
+			io.to(room).emit('new-message', message)
 
-			io.to(user.room).emit('message', { user: user.name, text: message })
-
-			callback()
+			// callback()
 		})
 
 		socket.on('disconnect', () => {
@@ -48,3 +54,5 @@ export default (io) =>
 			}
 		})
 	})
+
+export default coffeeChat

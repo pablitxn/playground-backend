@@ -1,6 +1,10 @@
 // Sockets
 import coffeeChat from './coffee-chat'
-import test from './coffee-chat/test'
+// Socket io
+import { Socket } from 'socket.io'
 
-// export default (io) => coffeeChat(io)
-export default (io) => test(io)
+const Sockets = (io: Socket) => {
+	coffeeChat(io)
+}
+
+export default Sockets
