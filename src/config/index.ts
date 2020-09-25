@@ -3,7 +3,7 @@ import dotenv from 'dotenv'
 
 // Set the NODE_ENV to 'development' by default
 // if (process.env.NODE_ENV === 'development') {
-if (true) {
+if (false) {
 	const envFound = dotenv.config()
 	if (envFound.error) {
 		// This error should crash whole process
