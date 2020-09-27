@@ -1,0 +1,16 @@
+version: "3.3"
+services:
+        express:
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                command: node build/app.js
+                ports:
+                        - "4200:4200"
+        websockets:
+                build:
+                        context: .
+                        dockerfile: Dockerfile
+                command: node build/app.js
+                ports:
+                        - '4420:4420'
